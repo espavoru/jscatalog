@@ -87,3 +87,29 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+
+/*=============================================
+=          Main styles              =
+=============================================*/
+main {
+  min-height: 100vh;
+  min-width: 100%;
+  padding: 100px;
+
+  background-image:
+    url('https://picsum.photos/1280/800?image=115');
+  background-attachment: fixed;
+  background-size: cover;
+
+  p {
+    font-size: 3em;
+    line-height: 1.5;
+    color: $white;
+    text-transform: uppercase;
+
+    text-shadow: 0 0 4px black;
+  }
+}
+
+/*=====  End of Main styles  ======*/
