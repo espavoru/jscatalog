@@ -1,30 +1,25 @@
 $(document).ready(function () {
-  // Цикли
-  var i = 0;
+  // Infinite loop + if else
+  var browser;
 
-  //while (++i < 5) alert( i ); // Остання 4
-  //while (i++ < 5) alert( i ); // Остання 5
+// запитуємо назву браузера нескінченно
+  do { // робимо запит хоча б один раз
+    browser = prompt('What is your browser', ''); // результат завжди string
 
-  // Вивести парні числа
-  /* for (i = 2; i <= 10; i++) {
-   if (i % 2) continue;
-   alert( i );
-   } */
-
-  // while loop
-  /*while ( i < 3 ) {
-   alert('номер ' + i + '!');
-   i++;
-   }*/
-
-  // infinite loop
-   /*while (true) {
-    var userInput = prompt('Enter number pls', 'Any number more than 100');
-
-    if (userInput > 100 || !userInput) {
-      alert('Canceled');
-      break;
+    if (browser === 'IE') { // Це IE?
+      alert('Oh, so you use IE!'); // Якщо так - вивід повідомлення
+    } else if (browser === 'Chrome' || browser === 'Firefox' || browser === 'Safari' || browser === 'Opera') {
+// Якщо це один з перелічених вище
+      alert('Yes, we are support these browsers');
+// Вивід повідомлення
+    } else if (browser) {
+// Якщо введено хоча б щось, але не підійшло з вищого
+      alert('We dont know such browser, try again');
+// Вивід повідомлення
     }
-    alert('Your number ' + userInput);
-  }*/
+// Виконуємо поки введено хоч щось.
+  } while (browser)
+// Якщо нічого не введено, або ESC - вихід з циклу
+// та вивід повідомлення
+  alert('We hope, you ok');
 });
