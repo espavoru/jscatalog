@@ -1,18 +1,30 @@
 $(document).ready(function () {
-  // Перетворення данних
+  // Цикли
+  var i = 0;
 
-  var task1 = '' + 1 + 0, // 10
-      task2 = '' - 1 + 0, // -1
-      task3 = true + false, // 1
-      task4 = 6 / '3', // 2
-      task5 = '2' * '3', // 6
-      task6 = 4 + 5 + 'px' // 6
-  ;
+  //while (++i < 5) alert( i ); // Остання 4
+  //while (i++ < 5) alert( i ); // Остання 5
 
-  console.log('task1 ' + task1);
-  console.log('task2 ' + task2);
-  console.log('task3 ' + task3);
-  console.log('task4 ' + task4);
-  console.log('task5 ' + task5);
-  console.log('task6 ' + task6);
+  // Вивести парні числа
+  /* for (i = 2; i <= 10; i++) {
+   if (i % 2) continue;
+   alert( i );
+   } */
+
+  // while loop
+  /*while ( i < 3 ) {
+   alert('номер ' + i + '!');
+   i++;
+   }*/
+
+  // infinite loop
+   /*while (true) {
+    var userInput = prompt('Enter number pls', 'Any number more than 100');
+
+    if (userInput > 100 || !userInput) {
+      alert('Canceled');
+      break;
+    }
+    alert('Your number ' + userInput);
+  }*/
 });
