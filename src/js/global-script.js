@@ -1,25 +1,43 @@
 $(document).ready(function () {
-  // Infinite loop + if else
-  var browser;
+  // Infinite loop + switch
+  var a = 0;
 
-// запитуємо назву браузера нескінченно
-  do { // робимо запит хоча б один раз
-    browser = prompt('What is your browser', ''); // результат завжди string
-
-    if (browser === 'IE') { // Це IE?
-      alert('Oh, so you use IE!'); // Якщо так - вивід повідомлення
-    } else if (browser === 'Chrome' || browser === 'Firefox' || browser === 'Safari' || browser === 'Opera') {
-// Якщо це один з перелічених вище
-      alert('Yes, we are support these browsers');
-// Вивід повідомлення
-    } else if (browser) {
-// Якщо введено хоча б щось, але не підійшло з вищого
-      alert('We dont know such browser, try again');
-// Вивід повідомлення
+// Виконуємо цикл нескінченно, поки
+// а не стане undefined / ESC
+  while (a || a == 0) {
+// запитуємо кожен раз "а"
+    a = prompt('What is a?', '');
+// Перевіряємо що було введено
+// Якщо введено не пусте значення
+// а нажали ESC, то виконуємо
+    if (!a && a != '') {
+      alert('Canceled');
+// якщо "а" має якесь значення
+    } else {
+// приводимо "а" до цифри
+      a = +a;
     }
-// Виконуємо поки введено хоч щось.
-  } while (browser)
-// Якщо нічого не введено, або ESC - вихід з циклу
-// та вивід повідомлення
-  alert('We hope, you ok');
+// Перевіряємо умови
+    switch (a) {
+// якщо 0, то виконуємо
+      case 0:
+        alert(0);
+        break;
+
+      case 1:
+        alert(1);
+        break;
+
+      case 2:
+      case 3:
+        alert('2,3');
+        break;
+// коли нічого не підійшло
+      default:
+        alert("You'll luck next time");
+        break;
+    }
+
+    alert('a is ' + a);
+  }
 });
