@@ -1,64 +1,93 @@
 $(document).ready(function () {
-// Functions
-
+// Recursion
   /**
-   * Check age function with ? op
-   */
-  function checkAge(age) {
-    return (age > 18) ? true :
-            confirm('Does your parents allowed?');
-  }
-
-//  var age = prompt('What is your age?', '');
-//  checkAge(age);
-
-  /**
-   * Check function with || op
-   */
-  function checkAgeOR(ageOr) {
-    return (ageOr > 18) ||
-            confirm('Does your parents allowed?');
-  }
-
-//  var ageOr = prompt('What is your age?', '');
-//  checkAgeOR();
-
-  /**
-   * Min function
-   */
-  function min(a, b) {
-    return (a < b) ? a : (a === b) ?
-            'Equal numbers bro: ' + a : b;
-  }
-
-//  alert(min(1, 1));
-
-  /**
-   * Возводит x в степень n (комментарий JSDoc)
-   *
-   * @param {number} x число, которое возводится в степень
-   * @param {number} n степень, должна быть целым числом больше 1
-   *
-   * @return {number} x в степени n
+   * Power function
    */
   function pow(x, n) {
-    var result = x;
+    if (n != 1) {
+      return x * pow(x, n - 1);
+    } else {
+      return x;
+    }
+  }
+//  alert(pow(2,3));
+
+  /**
+   * SumTo function with recursion
+   */
+  function sumTo(n) {
+    if (n > 1) {
+      return n + sumTo(n - 1);
+    } else {
+      return n;
+    }
+  }
+//  var userNumRec = +prompt('What is N number?', '');
+//  alert(sumTo(userNumRec));
+
+  /**
+   * SumTo function with for loop
+   */
+  function sumToFL(n) {
+    var result = n;
 
     for (var i = 1; i < n; i++) {
-      result *= x;
+      result += i;
     }
-
     return result;
   }
 
-  var x = prompt("x?", '');
-  var n = prompt("n?", '');
+//  var userNum = +prompt("What is your sum number?", '');
+//  alert(sumToFL(userNum));
 
-  if (n <= 1) {
-    alert('Степень ' + n +
-            'не поддерживается, введите целую степень, большую 1'
-            );
-  } else {
-    alert(pow(x, n));
+  /**
+   * SumTo function by math formula
+   */
+  function sumToMath(n) {
+    return n * (n + 1) / 2;
   }
+
+//  var userNumMath = +prompt("What is N number?", "");
+//  alert(sumToMath(userNumMath));
+
+  /**
+   * Factorial function with recursion
+   */
+  // If else variant
+  function factorialRec(n) {
+    if (n > 1) {
+      return n * factorialRec(n - 1);
+    } else {
+      return n;
+    }
+
+  }
+  // short solution
+  function factorialRecShort(n) {
+    return (n != 1) ? n * factorialRecShort(n - 1) : 1;
+  }
+
+//  var userNum = +prompt('What is your N?', '');
+//  alert(factorialRec(userNum));
+//  alert(factorialRecShort(userNum));
+
+  /**
+   * Fibonacci function
+   */
+  function fib(n) {
+    var a = 1,
+        b = 1;
+
+    for (var i = 3; i <= n; i++) {
+      var c = a + b;
+
+      a = b;
+      b = c;
+    }
+
+    return b;
+  }
+
+//  var userNum = +prompt('What is N?', '');
+//  alert(fib(userNum));
 });
