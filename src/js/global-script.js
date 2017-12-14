@@ -1,93 +1,68 @@
 $(document).ready(function () {
-// Recursion
+  // Strings
+
   /**
-   * Power function
+   * ucFirst
+   * Перший символ заголовним
    */
-  function pow(x, n) {
-    if (n != 1) {
-      return x * pow(x, n - 1);
-    } else {
-      return x;
+  function ucFirst() {
+    var str = prompt("What is your phrase?", "jhony");
+    if (!str)
+      return str;
+
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+//  alert(ucFirst());
+
+  /**
+   * checkSpam
+   */
+  function checkSpam(str) {
+    var strLower = str.toLowerCase();
+
+    return !!(~strLower.indexOf('viagra') ||
+            ~strLower.indexOf('xxx'));
+  }
+
+  /*
+   alert(checkSpam('vIaGras'));
+   alert(checkSpam('xXxXx'));
+   alert(checkSpam('vi*a*gra'));
+   */
+
+  /**
+   * truncate
+   * Cutting long string
+   */
+  function truncate(str, maxlength) {
+    if (str.length > maxlength) {
+      return str.slice(0, maxlength - 3) + '...';
     }
+    return str;
   }
-//  alert(pow(2,3));
+
+  function truncateShort(str, maxlength) {
+    return (str.length > maxlength) ? str.slice(0, maxlength - 3) +
+            '...' :
+            str;
+  }
+
+//  alert(truncate("Вот, что мне хотелось бы сказать на эту тему:", 20));
+//  alert(truncate("Всем привет!", 20));
+
+//  alert(truncateShort("Вот, друже, что мне хотелось бы сказать на эту тему:", 20));
+//  alert(truncateShort("Whats up!", 20));
 
   /**
-   * SumTo function with recursion
+   * extractCurrencyValue
    */
-  function sumTo(n) {
-    if (n > 1) {
-      return n + sumTo(n - 1);
-    } else {
-      return n;
-    }
-  }
-//  var userNumRec = +prompt('What is N number?', '');
-//  alert(sumTo(userNumRec));
-
-  /**
-   * SumTo function with for loop
-   */
-  function sumToFL(n) {
-    var result = n;
-
-    for (var i = 1; i < n; i++) {
-      result += i;
-    }
-    return result;
+  function extractCurrencyValue(str) {
+    return +str.slice(1);
   }
 
-//  var userNum = +prompt("What is your sum number?", '');
-//  alert(sumToFL(userNum));
-
-  /**
-   * SumTo function by math formula
-   */
-  function sumToMath(n) {
-    return n * (n + 1) / 2;
-  }
-
-//  var userNumMath = +prompt("What is N number?", "");
-//  alert(sumToMath(userNumMath));
-
-  /**
-   * Factorial function with recursion
-   */
-  // If else variant
-  function factorialRec(n) {
-    if (n > 1) {
-      return n * factorialRec(n - 1);
-    } else {
-      return n;
-    }
-
-  }
-  // short solution
-  function factorialRecShort(n) {
-    return (n != 1) ? n * factorialRecShort(n - 1) : 1;
-  }
-
-//  var userNum = +prompt('What is your N?', '');
-//  alert(factorialRec(userNum));
-//  alert(factorialRecShort(userNum));
-
-  /**
-   * Fibonacci function
-   */
-  function fib(n) {
-    var a = 1,
-        b = 1;
-
-    for (var i = 3; i <= n; i++) {
-      var c = a + b;
-
-      a = b;
-      b = c;
-    }
-
-    return b;
-  }
-
-//  var userNum = +prompt('What is N?', '');
-//  alert(fib(userNum));
+  alert(extractCurrencyValue('$120'));
+  alert(extractCurrencyValue('$5000'));
+  alert(extractCurrencyValue('$1.99'));
 });
+
