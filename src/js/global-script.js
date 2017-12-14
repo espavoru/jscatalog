@@ -1,92 +1,65 @@
 $(document).ready(function () {
-  /**
-   * isEmpty
+  /*
+   * Arrays
    */
-  function isEmpty(obj) {
-    for (var key in obj) {
-      return false;
-    }
-    return true;
+  /**
+   * getLastEl
+   */
+  function getLastEl() {
+    var goods = [
+      'toys',
+      'pups',
+      'food',
+      'accessories',
+      'sweets'
+    ];
+    var lastEl;
+
+    return lastEl = goods[goods.length - 1];
   }
 
-  var schedule = {};
-//  alert(isEmpty(schedule));
-
-  var schedule = {
-    '8:30': 'Get up'
-  };
-//  alert(isEmpty(schedule));
+//  alert(getLastEl());
 
   /**
-   * getSalaries
-   * Вивід суми зарплат
+   * addToEnd
    */
-  function getSalaries() {
-    var salaries = {
-      'John': 100,
-      'Bob': 300,
-      'Kate': 250
-    };
-    var totalSum = 0;
+  function addToEnd(newEl) {
+    var goods = [
+      'toys',
+      'pups',
+      'food',
+      'accessories',
+      'sweets'
+    ];
 
-    for (var name in salaries) {
-      totalSum += salaries[name];
-    }
-    return totalSum;
+    newEl = prompt('What is new element?', '');
+
+    goods.push(newEl);
+    return goods;
   }
 
-  // alert(getSalaries()); // 650, якщо обєкт пустий - вивід 0
+//  alert(addToEnd());;
 
   /**
-   * getTopSalarie
+   * makeArray
    */
-  function getTopSalarie() {
-    var salaries = {
-      'John': 100,
-      'Bob': 300,
-      'Kate': 250
-    };
-    var topSalarie = 0,
-            topName;
+  function makeArray() {
+    var style = [];
 
-    for (var name in salaries) {
-      if (topSalarie < salaries[name]) {
-        topSalarie = salaries[name];
-        topName = name;
-      }
-    }
-    return (salaries[name] != undefined) ?
-            'The biggest salary has: ' + topName : 'Data is empty';
+    style.push('Jazz', 'Bluez');
+    alert('Add new items \n' + style);
+
+    style.push('Rock&Roll');
+    alert('Add anoter one \n' + style);
+
+    style[style.length - 2] = 'Classic';
+    alert('Replace second from end \n' + style);
+
+    alert('Remove first item \n' + style.shift() + '\n' + style);
+
+    style.unshift('Rap', 'Raggey');
+    alert('Final result \n' + style);
   }
 
-//  alert(getTopSalarie());
-
-  /**
-   * multiplyNumeric
-   */
-  function multiplyNumeric() {
-    var menu = {
-      width: 200,
-      height: 300,
-      title: 'My menu'
-    };
-
-    // isNumeric function
-    function isNumeric(n) {
-      return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-
-    for (var prop in menu) {
-      if (isNumeric(menu[prop])) {
-        menu[prop] *= 2;
-      }
-      console.log(prop + ': ' + menu[prop]);
-    }
-
-    alert('menu width  = ' + menu['width'] + '\n' +
-          'menu height = ' + menu['height'] + '\n' +
-          'menu title  = ' + menu['title']);
-  }
-
-  multiplyNumeric();
+//  makeArray();
 });
