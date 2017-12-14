@@ -1,68 +1,92 @@
 $(document).ready(function () {
-  // Strings
-
   /**
-   * ucFirst
-   * Перший символ заголовним
+   * isEmpty
    */
-  function ucFirst() {
-    var str = prompt("What is your phrase?", "jhony");
-    if (!str)
-      return str;
-
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-//  alert(ucFirst());
-
-  /**
-   * checkSpam
-   */
-  function checkSpam(str) {
-    var strLower = str.toLowerCase();
-
-    return !!(~strLower.indexOf('viagra') ||
-            ~strLower.indexOf('xxx'));
-  }
-
-  /*
-   alert(checkSpam('vIaGras'));
-   alert(checkSpam('xXxXx'));
-   alert(checkSpam('vi*a*gra'));
-   */
-
-  /**
-   * truncate
-   * Cutting long string
-   */
-  function truncate(str, maxlength) {
-    if (str.length > maxlength) {
-      return str.slice(0, maxlength - 3) + '...';
+  function isEmpty(obj) {
+    for (var key in obj) {
+      return false;
     }
-    return str;
+    return true;
   }
 
-  function truncateShort(str, maxlength) {
-    return (str.length > maxlength) ? str.slice(0, maxlength - 3) +
-            '...' :
-            str;
-  }
+  var schedule = {};
+//  alert(isEmpty(schedule));
 
-//  alert(truncate("Вот, что мне хотелось бы сказать на эту тему:", 20));
-//  alert(truncate("Всем привет!", 20));
-
-//  alert(truncateShort("Вот, друже, что мне хотелось бы сказать на эту тему:", 20));
-//  alert(truncateShort("Whats up!", 20));
+  var schedule = {
+    '8:30': 'Get up'
+  };
+//  alert(isEmpty(schedule));
 
   /**
-   * extractCurrencyValue
+   * getSalaries
+   * Вивід суми зарплат
    */
-  function extractCurrencyValue(str) {
-    return +str.slice(1);
+  function getSalaries() {
+    var salaries = {
+      'John': 100,
+      'Bob': 300,
+      'Kate': 250
+    };
+    var totalSum = 0;
+
+    for (var name in salaries) {
+      totalSum += salaries[name];
+    }
+    return totalSum;
   }
 
-  alert(extractCurrencyValue('$120'));
-  alert(extractCurrencyValue('$5000'));
-  alert(extractCurrencyValue('$1.99'));
-});
+  // alert(getSalaries()); // 650, якщо обєкт пустий - вивід 0
 
+  /**
+   * getTopSalarie
+   */
+  function getTopSalarie() {
+    var salaries = {
+      'John': 100,
+      'Bob': 300,
+      'Kate': 250
+    };
+    var topSalarie = 0,
+            topName;
+
+    for (var name in salaries) {
+      if (topSalarie < salaries[name]) {
+        topSalarie = salaries[name];
+        topName = name;
+      }
+    }
+    return (salaries[name] != undefined) ?
+            'The biggest salary has: ' + topName : 'Data is empty';
+  }
+
+//  alert(getTopSalarie());
+
+  /**
+   * multiplyNumeric
+   */
+  function multiplyNumeric() {
+    var menu = {
+      width: 200,
+      height: 300,
+      title: 'My menu'
+    };
+
+    // isNumeric function
+    function isNumeric(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    for (var prop in menu) {
+      if (isNumeric(menu[prop])) {
+        menu[prop] *= 2;
+      }
+      console.log(prop + ': ' + menu[prop]);
+    }
+
+    alert('menu width  = ' + menu['width'] + '\n' +
+          'menu height = ' + menu['height'] + '\n' +
+          'menu title  = ' + menu['title']);
+  }
+
+  multiplyNumeric();
+});
