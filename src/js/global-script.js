@@ -383,5 +383,172 @@ $(document).ready(function () {
     }
   }
 
-  sortByField();
+//  sortByField();
+
+
+  /*
+   * Display nested list
+   * @param {Object} list
+   */
+  function printList(list) {
+    /* @type Object */
+    var tmp = list;
+
+    while (tmp) {
+      alert(tmp.value);
+      tmp = tmp.next;
+    }
+  }
+
+  /* @type Object */
+  var list = {
+    value: 1,
+    next: {
+      value: 2,
+      next: {
+        value: 3,
+        next: {
+          value: 4,
+          next: null
+        }
+      }
+    }
+  };
+
+//  printList(list);
+
+
+  /*
+   * Display nested list reversed
+   * @param {Object} list
+   */
+  function printReverseList(list) {
+    /* @type Array */
+    var arr = [];
+    /* @type Object */
+    var tmp = list;
+
+    while (tmp) {
+      arr.push(tmp.value);
+      tmp = tmp.next;
+    }
+
+    for (var i = arr.length - 1; i >= 0; i--) {
+      alert(arr[i]);
+    }
+  }
+
+  /* @type Object */
+  var list = {
+    value: 1,
+    next: {
+      value: 2,
+      next: {
+        value: 3,
+        next: {
+          value: 4,
+          next: null
+        }
+      }
+    }
+  };
+
+//  printReverseList(list);
+
+  /*
+   * Return array with only unique values
+   * @param {[sting|number]} arr
+   * @returns {Array}
+   */
+  function unuque(arr) {
+    /* @type Object */
+    var obj = {};
+
+    for (var i = 0; i < arr.length; i++) {
+      /* @type (string|number|boolean) */
+      var str = arr[i];
+      obj[str] = true; // запомнить строку в виде свойства объекта
+    }
+
+    return Object.keys(obj); // или собрать ключи перебором для IE8-
+  }
+
+  /* @type [string|number] */
+  var strings = ["кришна", "кришна", "харе", "харе",
+    "харе", "харе", "кришна", "кришна", "8-()"
+  ];
+
+//  alert(unique(strings)); // кришна, харе, 8-()
+
+  /**
+   * Get array with string elements length
+   * @returns {Array}
+   */
+  function getArrElLength() {
+    /* @type [string] */
+    var arr = ['Life', 'exist', 'on', 'Mars'];
+    /* @type [number] */
+    var arrLength = arr.map(function (item) {
+      return item.length;
+    });
+
+    return arrLength;
+  }
+
+//  alert(getArrElLength()); // 4,5,2,4
+
+
+/*
+ * Get sums of numbers for each index
+ * @param {[number]} arr - Array with numbers to summ
+ * @returns {[number]}
+ */
+  function getSums(arr) {
+    /* @type [number] */
+    var result = [];
+    if (!arr.length)
+      return result;
+    /* @type [number] */
+    var totalSum = arr.reduce(function (sum, item) {
+      result.push(sum);
+      return sum + item;
+    });
+    result.push(totalSum);
+
+    return result;
+  }
+
+//  alert(getSums([1, 2, 3, 4, 5])); // 1,3,6,10,15
+//  alert(getSums([-2, -1, 0, 1])); // -2,-3,-3,-2
+
+
+  /**
+   * Check is argument exist
+   * @param {(number|string)} param
+   */
+  function checkArg(param) {
+    alert(arguments.length ? 1 : 0);
+  }
+
+//  checkArg(); // 0
+//  checkArg(801); // 1
+//  checkArg(undefined); // 1
+
+  /*
+   * Get sum of all arguments
+   * @returns {number}
+   */
+  function sum() {
+    /* @type number */
+    var result = 0;
+
+    for (var i = 0; i < arguments.length; i++) {
+      result += arguments[i];
+    }
+    return result;
+  }
+
+  alert(sum()); // 0
+  alert(sum(1, 2)); // 3
+  alert(sum(1, 2, 5, 1.2)); // 9.2
 });
