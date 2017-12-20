@@ -1,62 +1,43 @@
 $(document).ready(function () {
   /*
-   * Object methods
-   *
-   * this
+   * Functions constructors new
    */
-  ;/**
-   * Calculator
+  /**
+   * Calculators constructor
+   * @returns {global-scriptL#1.Calculator}
    */
-  function makeCalculator() {
-    /* @type Object */
-    var calculator = {
-      read: function () {
-        this.numA = +prompt('Enter first number', 0);
-        this.numB = +prompt('Enter first number', 0);
-      },
-      'sum numbers': function () {
-        return this.numA + this.numB;
-      }
+  function Calculator() {
+    this.read = function () {
+      this.numA = +prompt('What is A number?', 0);
+      this.numB = +prompt('What is B number?', 0);
     };
-
-    calculator.mul = function () {
+    this.sum = function () {
+      return this.numA + this.numB;
+    };
+    this.mul = function () {
       return this.numA * this.numB;
     };
-
-    calculator.read();
-
-    alert('calc.numA is ' + calculator['numA']);
-    alert('calc.numB is ' + calculator.numB);
-
-    alert('Sum numbers is ' + calculator['sum numbers']());
-    alert('Multiple numbers is ' + calculator.mul());
   }
 
-//  makeCalculator();
+/* @type Object */
+  var myCalc = new Calculator();
 
-/*
- * Chaining
- */
-  function makeChain() {
-    /* @type Object */
-    var ladder = {
-      step: 0,
-      up: function() {
-        this.step++;
-        return this;
-      },
-      down: function() {
-        this.step--;
-        return this;
-      },
-      showStep: function() {
-        alert('Step is ' + this.step);
-        return this;
-      }
+  /*
+  myCalc.read();
+  alert('The sum result is ' + myCalc.sum());
+  alert('The multiplying result is ' + myCalc.mul());
+  */
+
+  function Accumulator(startingValue) {
+    this.value = startingValue;
+    this.read = function() {
+      this.value += +prompt('What is your number?', 0);
     };
-
-    ladder.up().up().down().up().showStep(); // 2
   }
 
-//  makeChain();
+  var accumulator = new Accumulator(1);
+
+  accumulator.read();
+  accumulator.read();
+  alert('Your sum is ' + accumulator.value);
 });
