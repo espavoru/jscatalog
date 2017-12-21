@@ -47,6 +47,10 @@ $(document).ready(function() {
    alert('Your sum is ' + accumulator.value);
    */
 
+  /**
+   * Calculator object constructor
+   * @returns {global-scriptL#1.CalculatorStr}
+   */
   function CalculatorStr() {
     var methods = {
       '+': function(a, b) {
@@ -56,7 +60,11 @@ $(document).ready(function() {
         return a - b;
       }
     };
-
+    /**
+     * Do calculation
+     * @param {string} str - 'Numb Operator Numb'
+     * @returns {Function}
+     */
     this.calculate = function(str) {
       /* @type Array */
       var split = str.split(' '),
@@ -73,7 +81,11 @@ $(document).ready(function() {
 
       return methods[op](a, b);
     };
-
+    /**
+     * Add new math operations
+     * @param {string} name - math operation
+     * @param {Function} func
+     */
     this.addMethod = function(name, func) {
       methods[name] = func;
     };
@@ -81,18 +93,66 @@ $(document).ready(function() {
 
   /* @type Object */
   var calc = new CalculatorStr();
+  /*
+   calc.addMethod('*', function(a, b) {
+   return a * b;
+   });
+   calc.addMethod('/', function(a, b) {
+   return a / b;
+   });
+   calc.addMethod('**', function(a, b) {
+   return Math.pow(a, b);
+   });
+   /* @type string */
+//  var result = 'Your result is ' + calc.calculate('3 / 7');
 
-  calc.addMethod('*', function(a, b) {
-    return a * b;
-  });
-  calc.addMethod('/', function(a, b) {
-    return a / b;
-  });
-  calc.addMethod('**', function(a, b) {
-    return Math.pow(a, b);
-  });
+//  alert(result);
 
-  var result = 'Your result is ' + calc.calculate('3 / 7');
+  /**
+   * Create object
+   * @param {string} fullName
+   * @returns {global-scriptL#1.User}
+   */
+  function User(fullName) {
+    this.fullName = fullName;
 
-  alert(result);
+    Object.defineProperties(this, {
+
+      firstName: {
+
+        get: function() {
+          return this.fullName.split(' ')[0];
+        },
+
+        set: function(newFirstName) {
+          this.fullName = newFirstName + ' ' + this.lastName;
+        }
+
+      },
+
+      lastName: {
+
+        get: function() {
+          return this.fullName.split(' ')[1];
+        },
+
+        set: function(newLastName) {
+          this.fullName = this.firstName + ' ' + newLastName;
+        }
+
+      }
+
+    });
+  }
+
+/* @type Object */
+  var johny = new User('John Smart');
+  // read firstName/lastName
+  alert(johny.firstName);
+  alert(johny.lastName);
+
+  // write in lastName
+  johny.lastName = 'Gray';
+
+  alert(johny.fullName);
 });
