@@ -1,34 +1,16 @@
 $(document).ready(function() {
-  /*
-   * Static properties and methods
-   */
-  /**
-   * Article constructor. Count total sum of articles. Save data
-   * last created article. Use static properties and methods
-   * @returns {global-scriptL#1.Article}
-   */
-  function Article() {
-    this.created = new Date();
-
-    Article.count++; // increase count every time
-    Article.last = this.created; // and save date
+/*
+ * Class instanceof
+ */
+/**
+ * Get type of any elements
+ * @param {Object|Array|string|number|boolean} obj - any type to determine
+ * @returns {unresolved} - type of element
+ */
+  function getClass(obj) {
+    return {}.toString.call(obj).slice(8, -1);
   }
 
-  Article.count = 0; // start value
-  // we can`t leave 'undundefined' cause ArArticle.count++ will be NaN
-
-  Article.showStats = function() {
-    alert('Total: ' + this.count + ', Last: ' +
-        this.last);
-  };
-
-  new Article();
-  new Article();
-
-  Article.showStats(); // Total 2, Last: (date)
-
-  new Article();
-
-  Article.showStats(); // Total 3, Last: (date)
-
+  alert(getClass(new Date)); // Date
+  alert(getClass([1, 2, 6])); // Array
 });
