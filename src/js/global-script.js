@@ -30,4 +30,5 @@ $(document).ready(function() {
   new Article();
 
   Article.showStats(); // Total 3, Last: (date)
+
 });
