@@ -1,108 +1,146 @@
 $(document).ready(function() {
   /*
-   * Object Orienting Programming
+   * OOP functional inheritance
    */
   /**
-   * Create users objects
-   * @returns {global-scriptL#1.User}
+   * Create general object machine
+   * @param {number} power
+   * @returns {global-scriptL#1.Machine}
    */
-  function User() {
-    /* @type string */
-    var firstName, surname;
+  function Machine(power) {
+    this._enabled = false;
 
-    this.setFirstName = function(newFirstName) {
-      firstName = newFirstName;
+    this.enable = function() {
+      this._enabled = true;
     };
 
-    this.setSurname = function(newSurname) {
-      surname = newSurname;
-    };
-
-    this.getFullName = function() {
-      return firstName + ' ' + surname;
+    this.disable = function() {
+      this._enabled = false;
     };
   }
-
-  /* @type Object */
-  var user = new User();
-  /*
-   user.setFirstName('Peter');
-   user.setSurname('Gray');
-   alert(user.getFullName());
-   */
-
   /**
-   * Create coffeemachine objects
-   * @returns {global-scriptL#1.User}
+   * Create coffeMachines objects
+   * @param {number} power
+   * @returns {global-scriptL#1.CoffeeMachine}
    */
-  function CoffeeMachine(power, capacity) {
+  function CoffeeMachine(power) {
+    Machine.apply(this, arguments);
+    /* @type number */
     var waterAmount = 0;
+    /* @type number */
+    var timerID;
 
-    var WATER_HEAT_CAPACITY = 4200;
-
-    var timerId;
-
-    function getTimeBoil() {
-      return waterAmount * WATER_HEAT_CAPACITY * 80 / power;
-    }
-
-    this.waterAmount = function(amount) {
-      // виклик без параметра, значить режим геттера, повертаємо
-      // властивість
-      if (!arguments.length) {
-        return waterAmount;
-      }
-
-      // інакше режим сеттера
-      if (amount < 0) {
-        throw new Error("Значення має бути позитивним");
-      }
-      if (amount > capacity) {
-        alert("Не можна залити води більше, ніж" + capacity);
-        throw new Error("Не можна залити води більше, ніж" + capacity);
-      }
-
+    this.setWaterAmount = function(amount) {
       waterAmount = amount;
-    };
-
-    this.addWater = function(amount) {
-      this.waterAmount(waterAmount + amount);
     };
 
     function onReady() {
       alert('Кава готова!');
     }
-
-    this.setOnReady = function(newOnReady) {
-      onReady = newOnReady;
+    /* @type Function */
+    var parentDisable = this.disable;
+    this.disable = function() {
+      parentDisable.call(this);
+      clearTimeout(timerID);
     };
 
     this.run = function() {
-      timerId = setTimeout(function() {
-        timerId = null;
-        onReady();
-      }, getTimeBoil());
+      if (!this._enabled) {
+        alert('Кавоварка вимкнена.');
+        throw new Error("Кавоварка вимкнена.");
+      }
+      timerID = setTimeout(onReady, 1000);
+    };
+  }
+  /* @type Object */
+  var coffeeMachine = new CoffeeMachine(1000);
+  coffeeMachine.enable();
+  // coffeeMachine.run();
+  // coffeeMachine.disable(); // зупинить роботу, нічого не виведе
+
+  /**
+   * Create fridge objects
+   * @param {number} power
+   * @returns {global-scriptL#1.Fridge}
+   */
+  function Fridge(power) {
+    // успадкувати
+    Machine.apply(this, arguments);
+    /* @type [string] */
+    var food = [];
+
+    this.addFood = function() {
+      if (!this._enabled) {
+        alert('Холодильник вимкнений');
+        throw new Error('Холодильник вимкнений');
+      }
+      if (food.length + arguments.length > this._power / 100) {
+        alert('Не можна додати, не вистачає потужності');
+        throw new Error("Не можна додати, не вистачає потужності");
+      }
+      for (var i = 0; i < arguments.length; i++) {
+        food.push(arguments[i]); // додати усе з arguments
+      }
     };
 
-    this.isRunning = function() {
-      return !!timerId;
+    this.getFood = function() {
+      // копіюємо їжу в новий масив, щоб маніпуляції з ним
+      // не міняли food
+      return food.slice();
+    };
+
+    this.filterFood = function(filter) {
+      return food.filter(filter);
+    };
+
+    this.removeFood = function(item) {
+      /* @type string */
+      var idx = food.indexOf(item);
+      if (idx != -1) {
+        food.splice(idx, 1);
+      }
+    };
+    /* @type Function */
+    var parentDisable = this.disable;
+    this.disable = function() {
+      if (food.length) {
+        alert('Не можна виключити: всередині їжа');
+        throw new Error("Не можна виключити: всередині їжа");
+      }
+      parentDisable();
     };
   }
 
-  var coffeMachine = new CoffeeMachine(100000, 500);
+  /* @type Object */
+  var fridge = new Fridge(500);
+  fridge.enable();
 
-  coffeMachine.waterAmount(200);
-  coffeMachine.addWater(200);
-  alert('Рівень води ' + coffeMachine.waterAmount() + ' ml');;
-
-  alert('Before: ' + coffeMachine.isRunning()); // Before: false
-
-  coffeMachine.run();
-  alert('In process: ' + coffeMachine.isRunning()); // In process: true
-
-  coffeMachine.setOnReady(function() {
-    var amount = coffeMachine.waterAmount();
-    alert('Кава вже готова: ' + amount + 'ml');
-    alert('After: ' + coffeMachine.isRunning()); // After: false
+  fridge.addFood({
+    title: 'котлета',
+    calories: 100
   });
+  fridge.addFood({
+    title: 'салат',
+    calories: 30
+  });
+  fridge.addFood({
+    title: 'сік',
+    calories: 20
+  });
+  /* @type [string] */
+  var dietItems = fridge.filterFood(function(item) {
+    return item.calories < 50;
+  });
+
+  fridge.removeFood('немає такої їжі'); // Без ефекту
+  alert(fridge.getFood().length); // 3
+
+  dietItems.forEach(function(item) {
+    alert(item.title); // садат, сік
+    fridge.removeFood(item);
+  });
+
+  alert(fridge.getFood().length); // 1
+
+  fridge.disable(); // помилка, в холодильнику є їжа
 });
