@@ -1,36 +1,150 @@
 <!DOCTYPE html>
 <html class="no-js  page" lang="ru">
 
-<head>
-  <meta charset="utf-8">
-  <title>Learn JavaScript</title>
-  <meta name="description" content="">
-  @@include('_include/page_head.html')
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title>Learn JavaScript</title>
+    <meta name="description" content="">
+    @@include('_include/page_head.html')
+  </head>
 
-<body>
+  <body>
 
-  <div class="page__inner">
+    <div class="page__inner">
 
-    <div class="page__content">
+      <div class="page__content">
 
-      <!--@@include('blocks/page-header/page-header.html')-->
+        <!--@@include('blocks/page-header/page-header.html')-->
 
-      <main role="main">
+        <main role="main">
 
-        <p></p>
+          <table id="age-table" class="mainTable">
+            <tr class="mainTable__row">
+              <td class="mainTable__cell">Your age:</td>
+              <td class="mainTable__cell">
+                <label>
+                  <input type="radio" name="age" value="young" checked> younger 18
+                </label>
+              </td>
+              <td class="mainTable__cell">
+                <label>
+                  <input type="radio" name="age" value="mature"> from 18 to 50
+                </label>
+              </td>
+              <td class="mainTable__cell">
+                <label>
+                  <input type="radio" name="age" value="senior"> older 60
+                </label>
+              </td>
+            </tr>
+          </table>
+
+          <ul>
+            <li>This</li>
+            <li>test</li>
+          </ul>
+          <ul>
+            <li>almost</li>
+            <li>complete</li>
+          </ul>
+
+          <!--=================================================
+                          =  First exs  =
+          ==================================================-->
+          <form name="search">
+            <label>Поиск по сайту:
+              <input type="text" name="search">
+            </label>
+            <input type="submit" value="Искать!">
+          </form>
+
+          <hr>
+
+          <form name="search-person">
+            Поиск по посетителям:
+            <table id="ageTable">
+              <tr>
+                <td>Возраст:</td>
+                <td id="age-list">
+                  <label>
+                    <input type="radio" name="age" value="young">до 18</label>
+                  <label>
+                    <input type="radio" name="age" value="mature">18-50</label>
+                  <label>
+                    <input type="radio" name="age" value="senior">более 50</label>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Дополнительно:</td>
+                <td>
+                  <input type="text" name="info[0]">
+                  <input type="text" name="info[1]">
+                  <input type="text" name="info[2]">
+                </td>
+              </tr>
+
+            </table>
+
+            <input type="submit" value="Искать!">
+          </form>
+          <!--====  End of First exs  ====-->
 
 
-      </main>
+
+
+          <!--=================================================
+                        =  Get list items  =
+          ==================================================-->
+          <ul class="animals">
+            <li>Животные
+              <ul>
+                <li>Млекопитающие
+                  <ul>
+                    <li>Коровы</li>
+                    <li>Ослы</li>
+                    <li>Собаки</li>
+                    <li>Тигры</li>
+                  </ul>
+                </li>
+                <li>Другие
+                  <ul>
+                    <li>Змеи</li>
+                    <li>Птицы</li>
+                    <li>Ящерицы</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Рыбы
+              <ul>
+                <li>Аквариумные
+                  <ul>
+                    <li>Гуппи</li>
+                    <li>Скалярии</li>
+                  </ul>
+
+                </li>
+                <li>Морские
+                  <ul>
+                    <li>Морская форель</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!--====  End of Get list items  ====-->
+
+        </main>
+
+      </div>
+
+      <div class="page__footer-wrapper">
+        <!--@@include('blocks/page-footer/page-footer.html')-->
+      </div>
 
     </div>
 
-    <div class="page__footer-wrapper">
-      <!--@@include('blocks/page-footer/page-footer.html')-->
-    </div>
-
-  </div>
-
-  @@include('_include/page_bottom.html')
-</body>
+    @@include('_include/page_bottom.html')
+  </body>
 </html>

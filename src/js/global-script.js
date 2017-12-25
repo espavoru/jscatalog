@@ -1,146 +1,101 @@
 $(document).ready(function() {
-  /*
-   * OOP functional inheritance
+  /**
+   * DOM searching elements
    */
   /**
-   * Create general object machine
-   * @param {number} power
-   * @returns {global-scriptL#1.Machine}
+   * Get DOM elements by tag names
+   * @param {string} elem
    */
-  function Machine(power) {
-    this._enabled = false;
+  function getElements(elem) {
 
-    this.enable = function() {
-      this._enabled = true;
-    };
+    let table = document.getElementById('age-table');
+    let elements = table.getElementsByTagName(elem);
 
-    this.disable = function() {
-      this._enabled = false;
-    };
-  }
-  /**
-   * Create coffeMachines objects
-   * @param {number} power
-   * @returns {global-scriptL#1.CoffeeMachine}
-   */
-  function CoffeeMachine(power) {
-    Machine.apply(this, arguments);
-    /* @type number */
-    var waterAmount = 0;
-    /* @type number */
-    var timerID;
-
-    this.setWaterAmount = function(amount) {
-      waterAmount = amount;
-    };
-
-    function onReady() {
-      alert('Кава готова!');
+    for (var i = 0; i < elements.length; i++) {
+      let oneElem = elements[i];
+      alert(oneElem.value + ': ' + oneElem.checked);
     }
-    /* @type Function */
-    var parentDisable = this.disable;
-    this.disable = function() {
-      parentDisable.call(this);
-      clearTimeout(timerID);
-    };
-
-    this.run = function() {
-      if (!this._enabled) {
-        alert('Кавоварка вимкнена.');
-        throw new Error("Кавоварка вимкнена.");
-      }
-      timerID = setTimeout(onReady, 1000);
-    };
   }
-  /* @type Object */
-  var coffeeMachine = new CoffeeMachine(1000);
-  coffeeMachine.enable();
-  // coffeeMachine.run();
-  // coffeeMachine.disable(); // зупинить роботу, нічого не виведе
+//  getElements('input');
 
   /**
-   * Create fridge objects
-   * @param {number} power
-   * @returns {global-scriptL#1.Fridge}
+   * Get elements by class
+   * @param {strig} className
    */
-  function Fridge(power) {
-    // успадкувати
-    Machine.apply(this, arguments);
-    /* @type [string] */
-    var food = [];
+  function getElemByClass(className) {
+    "use strict";
+    let parent = document.getElementsByClassName('mainTable')[0];
+    let elementsArr = parent.getElementsByClassName(className);
 
-    this.addFood = function() {
-      if (!this._enabled) {
-        alert('Холодильник вимкнений');
-        throw new Error('Холодильник вимкнений');
-      }
-      if (food.length + arguments.length > this._power / 100) {
-        alert('Не можна додати, не вистачає потужності');
-        throw new Error("Не можна додати, не вистачає потужності");
-      }
-      for (var i = 0; i < arguments.length; i++) {
-        food.push(arguments[i]); // додати усе з arguments
-      }
-    };
-
-    this.getFood = function() {
-      // копіюємо їжу в новий масив, щоб маніпуляції з ним
-      // не міняли food
-      return food.slice();
-    };
-
-    this.filterFood = function(filter) {
-      return food.filter(filter);
-    };
-
-    this.removeFood = function(item) {
-      /* @type string */
-      var idx = food.indexOf(item);
-      if (idx != -1) {
-        food.splice(idx, 1);
-      }
-    };
-    /* @type Function */
-    var parentDisable = this.disable;
-    this.disable = function() {
-      if (food.length) {
-        alert('Не можна виключити: всередині їжа');
-        throw new Error("Не можна виключити: всередині їжа");
-      }
-      parentDisable();
-    };
+    for (var i = 0; i < elementsArr.length; i++) {
+      let oneElem = elementsArr[i];
+      alert(`Elem ${i + 1} ` + oneElem.innerText);
+    }
   }
 
-  /* @type Object */
-  var fridge = new Fridge(500);
-  fridge.enable();
+//  getElemByClass('mainTable__cell');
 
-  fridge.addFood({
-    title: 'котлета',
-    calories: 100
-  });
-  fridge.addFood({
-    title: 'салат',
-    calories: 30
-  });
-  fridge.addFood({
-    title: 'сік',
-    calories: 20
-  });
-  /* @type [string] */
-  var dietItems = fridge.filterFood(function(item) {
-    return item.calories < 50;
-  });
+  /**
+   * Get all elements by css selector
+   * @param {string} cssSelector
+   */
+  function getQuerySelAll(cssSelector) {
+    "use strict";
 
-  fridge.removeFood('немає такої їжі'); // Без ефекту
-  alert(fridge.getFood().length); // 3
+    let elementArr = document.querySelectorAll(cssSelector);
 
-  dietItems.forEach(function(item) {
-    alert(item.title); // садат, сік
-    fridge.removeFood(item);
-  });
+    for (let i = 0; i < elementArr.length; i++) {
+      let oneElem = elementArr[i];
+      alert(oneElem.innerText);
+    }
+  }
 
-  alert(fridge.getFood().length); // 1
+//  getQuerySelAll('ul > li');
 
-  fridge.disable(); // помилка, в холодильнику є їжа
+
+  /**
+   * Get elements in diff ways
+   */
+  function getSomeEl() {
+    let labels = document.querySelectorAll('#ageTable label');
+    let firstCell = document.querySelectorAll('#ageTable tr:first-child td:first-child');
+    let secondForm = document.querySelectorAll('form:nth-of-type(2)');
+    let formSearch = document.getElementsByName('search')[0];
+    let inputInSearch = document.querySelectorAll('form[name$=search] input');
+    let infoEl = document.querySelector('[name="info[0]"]');
+    let infoInForm = document.querySelector('form[name="search-person"] [name="info[0]"]');
+    let lis = document.getElementsByTagName();
+
+    for (var i = 0; i < inputInSearch.length; i++) {
+      let elem = inputInSearch[i];
+//      alert(elem.outerHTML);
+    }
+
+//    alert(firstCell[0].outerHTML);
+//    alert(secondForm[0].outerHTML);
+//    alert(formSearch.outerHTML);
+//    alert(inputInSearch.outerHTML);
+//    alert(infoEl.outerHTML);
+//    alert(infoInForm.outerHTML);
+  }
+
+//  getSomeEl();
+
+  function getListItems() {
+      let lis = document.querySelectorAll('.animals li');
+      for (var i = 0; i < lis.length; i++) {
+
+        let title = lis[i].firstChild.data;
+
+        title = title.trim();
+
+        let childCount = +lis[i].getElementsByTagName('li').length;
+
+        childCount ? alert(title + ': ' + childCount) :
+          alert('- ' + title);
+      }
+    };
+
+    getListItems();
+
 });
