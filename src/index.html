@@ -21,11 +21,22 @@
           <!--=================================================
                       =  First exs  =
 ==================================================-->
-          <form name="search">
+          <form name="search" data-custom-search="site-search">
             <label>Поиск по сайту:
               <input type="text" name="search">
             </label>
             <input type="submit" value="Искать!">
+            
+            <a name="list">список</a>
+            <ul class="anchorList">
+              <li><a href="http://google.com">http://google.com</a></li>
+              <li><a href="/tutorial">/tutorial.html</a></li>
+              <li><a href="local/path">local/path</a></li>
+              <li><a href="ftp://ftp.com/my.zip">ftp://ftp.com/my.zip</a></li>
+              <li><a href="http://nodejs.org">http://nodejs.org</a></li>
+              <li><a href="http://internal.com/test">http://internal.com/test</a></li>
+            </ul>
+
           </form>
 
           <hr>

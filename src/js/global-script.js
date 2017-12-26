@@ -1,24 +1,47 @@
 $(document).ready(function() {
   /**
-   * Basic dom node properties
+   * Attributes and custom properties
    */
-//  console.dir(document.body);
-//  console.log(document.body);
+  let elem = document.querySelectorAll('[data-custom-search="site-search"]')[0];
+  let elemData = elem.dataset;
+  /*
+   console.dir('Your element is: \n' +
+   elem.outerHTML);
+   console.log('\n\You looking for attribute: \n');
+   console.log(elemData);
+   console.dir('\n\Attribute value is: \n' + elemData.customSearch);
+   */
 
-  let elem = document.querySelectorAll('.animals');
+  function setClass() {
+    let css = 'a[href*="://"]:not([href*="http://internal.com"])';
+    let links = document.querySelectorAll(css);
 
-//  console.log(elem[0].innerHTML = '<b>Not valid code');
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.add('external');
+    }
+  }
 
-  elem = document.querySelector('[name=search]');
-//  console.dir(elem.outerHTML);
+//  setClass();
 
-  // заменяем outerHTML на <p>...</p>
-//  elem.outerHTML = '<p>Some new content</p>';
-  // ... но содержимое div.outerHTML осталось тем же, несмотря
-  // на "перезапись"
-//  console.dir(elem.outerHTML);
-  elem = document.querySelector('[name=search]');
+/*
+ * Add custom class to elements
+ */
+  function setLinksBg() {
+    "use strict";
 
-//  elem.children[0].hidden = true;
-  console.dir(elem.outerHTML);
+    let links = document.querySelectorAll('a');
+
+    for (let i = 0; i < links.length; i++) {
+      let a = links[i];
+      let href = a.getAttribute('href');
+
+      if (!href) continue; // немає атрибуту
+      if (href.indexOf('://') == -1) continue; // без протоколу
+      if (href.indexOf('http://internal.com') === 0) continue; // внутрішня
+
+      a.classList.add('external');
+    }
+  }
+
+  setLinksBg();
 });
