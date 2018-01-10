@@ -18,59 +18,30 @@
 
         <main role="main">
 
-          <!--=================================================
-                      =  First exs  =
-==================================================-->
-          <form name="search" data-custom-search="site-search">
-            <label>Поиск по сайту:
-              <input type="text" name="search">
-            </label>
-            <input type="submit" value="Искать!">
+          <!--=====================================
+              =            Slider            =
+          ======================================-->
 
-            <a name="list">список</a>
-            <ul class="anchorList">
-              <li><a href="http://google.com">http://google.com</a></li>
-              <li><a href="/tutorial">/tutorial.html</a></li>
-              <li><a href="local/path">local/path</a></li>
-              <li><a href="ftp://ftp.com/my.zip">ftp://ftp.com/my.zip</a></li>
-              <li><a href="http://nodejs.org">http://nodejs.org</a></li>
-              <li><a href="http://internal.com/test">http://internal.com/test</a></li>
-            </ul>
+          <div class="slider">
+            <div class="slider__items">
+              <img class="active" src="/img/imgf01.jpg" alt="alt" title="title">
+              <img src="/img/imgf02.jpg" alt="alt" title="title">
+              <img src="/img/imgf03.jpg" alt="alt" title="title">
+              <img src="/img/imgf04.jpg" alt="alt" title="title">
+              <img src="/img/imgf05.jpg" alt="alt" title="title">
+              <img src="/img/imgf06.jpg" alt="alt" title="title">
+              <img src="/img/imgf07.jpg" alt="alt" title="title">
+              <img src="/img/imgf08.jpg" alt="alt" title="title">
+              <img src="/img/imgf09.jpg" alt="alt" title="title">
+              <img src="/img/imgf10.jpg" alt="alt" title="title">
+            </div>
+            <div class="slider__controls">
+              <button class="slider__prev">Prev</button>
+              <button class="slider__next">Next</button>
+            </div>
+          </div>
 
-          </form>
-
-          <hr>
-
-          <form name="search-person">
-            Поиск по посетителям:
-            <table id="ageTable">
-              <tr>
-                <td>Возраст:</td>
-                <td id="age-list">
-                  <label>
-                    <input type="radio" name="age" value="young">до 18</label>
-                  <label>
-                    <input type="radio" name="age" value="mature">18-50</label>
-                  <label>
-                    <input type="radio" name="age" value="senior">более 50</label>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Дополнительно:</td>
-                <td>
-                  <input type="text" name="info[0]">
-                  <input type="text" name="info[1]">
-                  <input type="text" name="info[2]">
-                </td>
-              </tr>
-
-            </table>
-
-            <input type="submit" value="Искать!">
-          </form>
-          <!--====  End of First exs  ====-->
-
+          <!--====  End of Slider  ====-->
         </main>
 
       </div>
