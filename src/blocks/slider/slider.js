@@ -53,20 +53,21 @@ function Slider(time) {
   getNextSlide = function() { // Прив'язка контексту через bind
     this.items[currentSlideIndex].classList.remove('active');
 
-    currentSlideIndex >= this.items.length -1 ?
-      currentSlideIndex = 0 : currentSlideIndex++;
+    currentSlideIndex >= this.items.length - 1 ?
+        currentSlideIndex = 0 : currentSlideIndex++;
 
     this.items[currentSlideIndex].classList.add('active');
   }.bind(this);
 
   function getPrevSlide() { // Збереження контексту через замикання
-   slider.items[currentSlideIndex].classList.remove('active');
+    slider.items[currentSlideIndex].classList.remove('active');
 
-   currentSlideIndex <= 0 ?
-    currentSlideIndex = slider.items.length - 1 : currentSlideIndex--;
+    currentSlideIndex <= 0 ?
+        currentSlideIndex = slider.items.length - 1 : currentSlideIndex--;
 
     slider.items[currentSlideIndex].classList.add('active');
-  };
+  }
+  ;
 
   timer = setInterval(getNextSlide, time || 5000);
 
@@ -79,3 +80,30 @@ function Slider(time) {
 
 let slider1 = new Slider();
 slider1.start();
+
+function User() {
+  let firstName = '',
+      surname = '';
+
+  this.setFirstName = function(userFirstName) {
+    firstName = userFirstName;
+    return this;
+  };
+
+  this.setSurname = function(userSurname) {
+    surname = userSurname;
+    return this;
+  };
+
+  this.getFullName = function() {
+    return firstName + ' ' + surname;
+  };
+}
+
+let user = new User();
+user.setFirstName('John');
+user.setSurname('Smith');
+
+//alert(user.getFullName());
+
+

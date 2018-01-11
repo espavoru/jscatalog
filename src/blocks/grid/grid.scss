@@ -1,0 +1,31 @@
+// В этом файле должны быть стили для БЭМ-блока grid, его элементов,
+// модификаторов, псевдоселекторов, псевдоэлементов, @media-условий...
+// Очередность: http://nicothin.github.io/idiomatic-pre-CSS/#priority
+
+.grid {
+
+  $block-name:                &; // #{$block-name}__element
+
+  display: flex;
+  flex-flow: row wrap;
+  padding-top: 110px;
+
+  &__item {
+    flex: 1 1 20%;
+    /*min-width: 20%;*/
+    padding-top: 20%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+
+    background-color: #ccc;
+    cursor: pointer;
+
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+
+    &--active {
+      outline: 2px solid red;
+    }
+  }
+}

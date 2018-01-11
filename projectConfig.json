@@ -56,7 +56,8 @@
     "tabs": [],
     "object-fit-polyfill": [],
     "embed-responsive": [],
-    "slider": []
+    "slider": [],
+    "grid": []
   },
   "addCssBefore": [
     "./src/scss/variables.scss",
