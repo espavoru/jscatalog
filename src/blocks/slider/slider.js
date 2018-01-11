@@ -3,32 +3,79 @@
 // (function(){}());
 
 /* @type Array */
-let items = document.querySelectorAll('.slider img'),
-    /* @type Obj */
-    btnPrev = document.querySelector('.slider__prev'),
-    /* @type Obj */
-    btnNext = document.querySelector('.slider__next'),
-    /* @type number */
-    currentSlideIndex = 0;
+//let items = document.querySelectorAll('.slider img'),
+//    /* @type Obj */
+//    btnPrev = document.querySelector('.slider__prev'),
+//    /* @type Obj */
+//    btnNext = document.querySelector('.slider__next'),
+//    /* @type number */
+//    currentSlideIndex = 0,
+//    timer = setInterval(getNextSlide, 5000);
+//
+//btnNext.addEventListener('click', getNextSlide);
+//btnPrev.addEventListener('click', getPrevSlide);
+//clearInterval(timer);
+//
+//function getNextSlide() {
+//  items[currentSlideIndex].classList.remove('active');
+//
+//  currentSlideIndex >= items.length -1 ?
+//    currentSlideIndex = 0 : currentSlideIndex++;
+//
+//  items[currentSlideIndex].classList.add('active');
+//}
+//
+//function getPrevSlide() {
+//  items[currentSlideIndex].classList.remove('active');
+//
+//  currentSlideIndex <= 0 ?
+//    currentSlideIndex = items.length -1 : currentSlideIndex--;
+//
+//  items[currentSlideIndex].classList.add('active');
+//}
 
-btnNext.addEventListener('click', getNextSlide);
-btnPrev.addEventListener('click', getPrevSlide);
 
+/**
+ * Simple sllider
+ * @param {number} time - Timer in ms
+ * @returns {Slider}
+ */
+function Slider(time) {
+  let currentSlideIndex = 0,
+      getNextSlide,
+      timer,
+      slider = this;
 
-function getNextSlide() {
-  items[currentSlideIndex].classList.remove('active');
+  this.items = document.querySelectorAll('.slider img');
+  this.btnPrev = document.querySelector('.slider__prev');
+  this.btnNext = document.querySelector('.slider__next');
 
-  currentSlideIndex >= items.length -1 ?
-    currentSlideIndex = 0 : currentSlideIndex++;
+  getNextSlide = function() { // Прив'язка контексту через bind
+    this.items[currentSlideIndex].classList.remove('active');
 
-  items[currentSlideIndex].classList.add('active');
+    currentSlideIndex >= this.items.length -1 ?
+      currentSlideIndex = 0 : currentSlideIndex++;
+
+    this.items[currentSlideIndex].classList.add('active');
+  }.bind(this);
+
+  function getPrevSlide() { // Збереження контексту через замикання
+   slider.items[currentSlideIndex].classList.remove('active');
+
+   currentSlideIndex <= 0 ?
+    currentSlideIndex = slider.items.length - 1 : currentSlideIndex--;
+
+    slider.items[currentSlideIndex].classList.add('active');
+  };
+
+  timer = setInterval(getNextSlide, time || 5000);
+
+  this.start = function() {
+    this.btnNext.addEventListener('click', getNextSlide);
+    this.btnPrev.addEventListener('click', getPrevSlide);
+    clearInterval(timer);
+  };
 }
 
-function getPrevSlide() {
-  items[currentSlideIndex].classList.remove('active');
-
-  currentSlideIndex <= 0 ?
-    currentSlideIndex = items.length -1 : currentSlideIndex--;
-
-  items[currentSlideIndex].classList.add('active');
-}
+let slider1 = new Slider();
+slider1.start();

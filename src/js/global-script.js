@@ -23,5 +23,5 @@ $(document).ready(function() {
     }
   };
 
-  calculator.read().sum().mul();
+ // calculator.read().sum().mul();
 });
