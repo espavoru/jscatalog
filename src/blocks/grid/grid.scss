@@ -12,12 +12,12 @@
 
   &__item {
     flex: 0 1 20%;
-    /*min-width: 20%;*/
     padding-top: 20%;
     margin-right: 15px;
     margin-bottom: 15px;
 
     background-color: #ccc;
+    transition: all 1s;
     cursor: pointer;
 
     &:nth-child(4n) {
@@ -25,6 +25,10 @@
 
     &--active {
       outline: 2px solid red;
+    }
+
+    &--fade {
+      opacity: 0;
     }
   }
 }

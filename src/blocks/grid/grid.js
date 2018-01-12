@@ -59,6 +59,6 @@ window.onload = function() {
 
   /* @type Obj */
   let grid = new Grid();
-  grid.run();
+//  grid.run();
 
 };
