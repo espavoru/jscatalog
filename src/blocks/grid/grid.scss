@@ -11,10 +11,16 @@
   padding-top: 110px;
 
   &__item {
-    flex: 0 1 20%;
-    padding-top: 20%;
+    flex: 0 1 22.4%;
+    /*padding-top: 20%;*/
+    min-height: 130px;
     margin-right: 15px;
     margin-bottom: 15px;
+
+    line-height: 130px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ccc;
 
     background-color: #ccc;
     transition: all 1s;
@@ -24,7 +30,8 @@
     }
 
     &--active {
-      outline: 2px solid red;
+      background-color: #333;
+      color: $gray-lightest;
     }
 
     &--fade {
