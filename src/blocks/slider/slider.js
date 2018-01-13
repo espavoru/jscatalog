@@ -78,8 +78,8 @@ function Slider(time) {
   };
 }
 
-let slider1 = new Slider();
-slider1.start();
+//let slider1 = new Slider();
+//slider1.start();
 
 function User() {
   let firstName = '',

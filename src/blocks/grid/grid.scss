@@ -8,19 +8,19 @@
 
   display: flex;
   flex-flow: row wrap;
-  padding-top: 110px;
+  padding-top: 60px;
 
   &__item {
     flex: 0 1 22.4%;
-    /*padding-top: 20%;*/
     min-height: 130px;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    margin-right: 1.3%;
+    margin-left: 1.3%;
+    margin-bottom: 2.6%;
 
     line-height: 130px;
     text-transform: uppercase;
     text-align: center;
-    color: #ccc;
+    color: $gray-darker;
 
     background-color: #ccc;
     transition: all 1s;
@@ -33,9 +33,18 @@
       background-color: #333;
       color: $gray-lightest;
     }
+  }
 
-    &--fade {
-      opacity: 0;
-    }
+  &__total {
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 30px;
+
+    font-size: 1.5em;
+    color: $gray-darker;
+    text-align: center;
+
+    border: 2px solid $gray-darker;
   }
 }
