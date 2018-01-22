@@ -51,7 +51,8 @@
     "object-fit-polyfill": [],
     "embed-responsive": [],
     "slider": [],
-    "grid": []
+    "grid": [],
+    "menuMy": []
   },
   "addCssBefore": [
     "./src/scss/variables.scss",
