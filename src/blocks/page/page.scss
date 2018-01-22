@@ -93,7 +93,6 @@ img {
 =          Main styles              =
 =============================================*/
 main {
-  min-height: 80vh;
   color: $gray-darker;
   text-align: center;
 
@@ -257,21 +256,4 @@ main {
   }
 }
 
-/**
- *
- * Buttons
- *
- */
-.menu {
-  display: flex;
-  justify-content: center;
-}
-
-a.btn {
-  margin-right: 50px;
-
-  &:last-child {
-    margin: 0;
-  }
-}
 /*=====  End of Main styles  ======*/
