@@ -1,32 +1,33 @@
 $(document).ready(function() {
-  var hotelSeagulf = new Hotel({
-    name: 'Seagulf',
-    roomRate: 240,
-    discount: 35,
-    daysToExpire: 6
+  var menu,
+      main,
+      elem;
+
+  menu = new Menu({
+    title: 'Brands',
+    items: {
+      asus: 'Asus',
+      sony: 'Sony',
+      hp: 'HP',
+      acer: 'Acer'
+    },
+    onselect: showName
   });
 
-  var main = document.querySelector('main');
-  hotelSeagulf.getElem().classList.add('hotel--seaGulf');
-  main.insertBefore(hotelSeagulf.getElem(), null);
+  function showName(itemName) {
+    alert(itemName);
+  }
 
-
-  var hotelJane = new Hotel({
-    name: 'Jane',
-    roomRate: 150,
-    discount: 20,
-    daysToExpire: 10
-  });
-
-  hotelJane.getElem().classList.add('hotel--jane');
-  main.appendChild(hotelJane.getElem());
+  elem = menu.getElem();
+  main = document.querySelector('main');
+  main.appendChild(elem);
 
   /**
    *
    * @param {type} options
-   * @returns {undefined}
+   * @returns {hotelL#1.Menu}
    */
-  function Hotel(options) {
+  function Menu(options) {
     var elem;
 
     function getElem() {
@@ -36,67 +37,72 @@ $(document).ready(function() {
 
     function render() {
       elem = document.createElement('div');
-      elem.className = 'hotel';
-      elem.insertBefore(hotelName(), null);
-      elem.insertBefore(roomRate(), null);
-      elem.insertBefore(specialRate(), null);
-      elem.insertBefore(promo(), null);
+      elem.setAttribute('class', 'menu');
+
+      var title = document.createElement('span');
+      title.setAttribute('class', 'menu__title');
+      title.textContent = options.title;
+      elem.insertBefore(title, null);
+
+      elem.addEventListener('mousedown', function(){
+        return false;
+      });
+
+      elem.addEventListener('click', function(e) {
+        var target = e.target;
+
+        target.closest('.menu__title') ? toggle() : null;
+
+        if (target.closest('a')) {
+          e.preventDefault();
+          select(target.closest('a'));
+        }
+      });
     }
 
-    function hotelName() {
-      var hotelName = document.createElement('div');
-      hotelName.className = 'hotel__name';
-      hotelName.textContent = options.name;
-      return hotelName;
+    function select(link) {
+      options.onselect(link.getAttribute('href').slice(1));
     }
 
-    function roomRate() {
-      var roomRate = document.createElement('div');
-      roomRate.className = 'hotel__roomRate';
-      roomRate.textContent = options.roomRate.toFixed(2) + ' USD';
-      return roomRate;
+    function renderItems() {
+      if (elem.querySelector('.menu__items')) return ;
+
+      var list, items, li, a;
+      list = document.createElement('ul');
+      list.setAttribute('class', 'menu__items');
+      items = options.items || {};
+
+      for (var key in items) {
+        li = document.createElement('li');
+        li.setAttribute('class', 'menu__item');
+        a = document.createElement('a');
+        a.setAttribute('class', 'menu__link');
+        a.setAttribute('href', '#' + key);
+        a.textContent = items[key];
+
+        li.appendChild(a);
+        list.appendChild(li);
+      }
+      elem.appendChild(list);
     }
 
-    function specialRate() {
-      var specialRate = document.createElement('div');
-      specialRate.className = 'hotel__specialRate';
-      specialRate.textContent = offerPrice() + ' USD';
-      return specialRate;
+    function open() {
+      renderItems();
+      elem.classList.add('menu--open');
     }
 
-    function offerPrice() {
-      var offerRate = options.roomRate * ((100 - options.discount)) / 100;
-      return offerRate;
+    function close() {
+      elem.classList.remove('menu--open');
     }
 
-    function offerExpires(today) {
-      var expiryMsg, weekFromToday, day, date, month, year, dayNames, monthNames;
-      /* 7 days in ms */
-      weekFromToday = new Date(today.getTime() +
-          options.daysToExpire * 24 * 60 * 60 * 1000);
-      dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
-        'Friday', 'Saturday', 'Sunday'];
-      monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-        'August', 'September', 'October', 'November', 'December'];
-      day = dayNames[weekFromToday.getDay()];
-      date = weekFromToday.getDate();
-      month = monthNames[weekFromToday.getMonth()];
-      year = weekFromToday.getFullYear();
-
-      expiryMsg = 'Promotion ends at ';
-      expiryMsg += day + '</br>(' + date + ' ' + month + ' ' +
-          year + ')';
-      return expiryMsg;
-    }
-
-    function promo() {
-      var today = new Date();
-      var elEnds = document.createElement('div');
-      elEnds.className = 'hotel__promo';
-      elEnds.innerHTML = offerExpires(today);
-      return elEnds;
+    function toggle() {
+      elem.classList.contains('menu--open') ?
+        close() : open();
     }
 
     this.getElem = getElem;
+    this.open = open;
+    this.close = close;
+    this.toggle = toggle;
   }
 });
