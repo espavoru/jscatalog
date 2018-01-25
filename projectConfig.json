@@ -53,7 +53,9 @@
     "slider": [],
     "grid": [],
     "menuMy": [],
-    "hotel": []
+    "hotel": [],
+    "todolist": [],
+    "font-awesome": []
   },
   "addCssBefore": [
     "./src/scss/variables.scss",
