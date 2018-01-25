@@ -1,0 +1,29 @@
+<!--DEV
+
+Для использования этого файла как шаблона:
+
+@ @include('blocks/todolist/todolist.html')
+
+(Нужно убрать пробел между символами @)
+Подробнее: https://www.npmjs.com/package/gulp-file-include
+
+-->
+
+
+<div class="todolist">
+  <h1 class="todolist__header">List</h1>
+  <h2 class="todolist__title">Backery shop</h2>
+  <ul class="todolist__items">
+    <li class="todolist__item todolist__item--hot">Pie</li>
+    <li class="todolist__item todolist__item--hot">Cake</li>
+    <li class="todolist__item todolist__item--hot">Roll</li>
+    <li class="todolist__item">Honey</li>
+  </ul>
+
+  <div class="todolist__btnWrapper"><button class="todolist__btn">New element</button></div>
+  <form class="todolist__form">
+    <input type="text" class="todolist__newItemDescr" placeholder="Add description...">
+    <input type="submit" class="todolist__submit" value="Add">
+  </form>
+</div>
+

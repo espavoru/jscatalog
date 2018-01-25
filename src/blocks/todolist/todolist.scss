@@ -1,0 +1,97 @@
+// В этом файле должны быть стили для БЭМ-блока todolist, его элементов,
+// модификаторов, псевдоселекторов, псевдоэлементов, @media-условий...
+// Очередность: http://nicothin.github.io/idiomatic-pre-CSS/#priority
+
+.todolist {
+
+  $block-name:                &; // #{$block-name}__element
+
+  max-width: 400px;
+  margin: 30px;
+  padding: 20px;
+
+  color: $gray-lighter;
+  background-color: $black;
+
+  &__header {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__title {
+    margin-top: 10px;
+  }
+
+  &__items {
+    padding: 0;
+    text-align: left;
+    list-style-type: none;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+
+    font-size: 1.2em;
+    color: $white;
+
+    border-bottom: 1px solid #8a7166;
+    background-color: #f7986d;
+    cursor: pointer;
+
+    &:last-child {
+      border: none;
+    }
+
+    &--hot {
+      color: $gray-lightest;
+      background-color: #e67474;
+    }
+
+    &--cool {
+      background-color: #8ed0cf;
+      color: $gray;
+    }
+
+    &--complete {
+      background-color: $gray;
+    }
+  }
+
+  &__btnWrapper {
+    text-align: right;
+  }
+
+  &__btn {
+    padding: 5px 20px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+
+    color: $white;
+    border: none;
+    border-radius: 4px;
+    background-color: #e67474;
+    cursor: pointer;
+  }
+
+  &__newItemDescr {
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  &__submit {
+    min-width: 40%;
+    padding: 5px 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+
+    color: $white;
+    border: none;
+    border-radius: 4px;
+    background-color: #e67474;
+    cursor: pointer;
+  }
+}
