@@ -22,6 +22,12 @@ $(function() {
     $('li:nth-child(2)').addClass('todolist__item--cool');
   }
 //  exampleText();
+  function exampleText() {
+    var elem = $('.todolist__item:eq(0)');
+    elem.text('Sweets');
+    $('li:nth-child(2)').addClass('todolist__item--cool');
+  }
+//  exampleText();
   function exampleHtml() {
     var $listHTML = $('.todolist__items').html();
     $('.todolist__items').append($listHTML);
@@ -35,6 +41,7 @@ $(function() {
   function ex03() {
     var $listItemHTML = $('li').html();
 //    $('li:eq(0)').prepend('<i class="fa fa-android"></i> ');
+//$('li:eq(0)').prepend('<i class="fa fa-android"></i> ');
     $('li').append(' <i>' + $listItemHTML + '</i> ');
   }
 //  ex03();
@@ -46,6 +53,7 @@ $(function() {
   function ex05() {
     $('li').html(function() {
       return '<a href="#">' + $(this).text() + ' ' + this.className + '</a>';
+      return '<em>' + $(this).text() + '</em>';
     });
   }
 //  ex05();
@@ -58,14 +66,19 @@ $(function() {
     $('ul').before('<p class="alert alert--success">List updated!</p>');
     $('p.alert').hide().fadeIn(1000);
     var $newListItem = $('<li class="todolist__item"><em>Ice cream</em> sale</li>');
+    $('li:eq(3)').remove();
+  }
+//  ex06();
+  function alert07() {
+    $('ul').before('<p class="alert alert--success">List updated!');
+    var $newListItem = $('<li class="todolist__item"><em>Ice cream</em> sale</i>');
     $('li:last').after($newListItem);
     $('li').prepend('+ ');
   }
 //  alert07();
   function css08() {
     $faHeart = $('<i class="fa fa-heart"></i>');
-    $('li:eq(2)')
-        .removeClass('todolist__item--hot')
+    $('li:eq(2)').removeClass('todolist__item--hot')
         .addClass('todolist__item--cool')
         .append($faHeart)
         .css('color', '#333');
@@ -94,6 +107,7 @@ $(function() {
   function each10() {
     $('li').each(function() {
       var classes = this.className;
+      var classes = this.getAttribute('class');
       $(this).append('<span class="todolist__item--order">'
           + classes + '</span>');
     });
@@ -102,15 +116,13 @@ $(function() {
   function events11() {
     var classes;
     var $listItems = $('li');
-
     $listItems.on('mouseover click', function(e) {
       classes = this.getAttribute('class');
 //      $listItems.children('span').remove();
       $(this).append('<span class="todolist__item--priority">' +
           classes + '</span>');
     });
-
-    $listItems.on('mouseout', function(e) {
+    $listItems.on('mouseout', function() {
       $(this).children('span').remove();
     });
   }
@@ -120,6 +132,7 @@ $(function() {
       $('li span').remove();
       var date = new Date();
 //      date.setTime(e.timeStamp);
+      date.setTime(e.timeStamp);
       var clicked = date.toDateString();
       $(this).append('<span class="date">' +
           clicked + ' ' + e.type + '</span>');
@@ -130,7 +143,6 @@ $(function() {
     var listItem,
         itemStatus,
         eventType;
-
     $('ul').on(
         'click mouseover', // event
         'li:not(:last)', // filter
@@ -195,7 +207,6 @@ $(function() {
         .removeClass('todolist__item--hot');
     $('li:not(.todolist__item--hot)')
         .addClass('todolist__item--complete');
-
     $listItems.each(function() {
       var $this = $(this);
       if ($this.is('todolist__item--hot')) {
@@ -210,14 +221,11 @@ $(function() {
     var $newItemBtn,
         $newItemForm,
         $textInput;
-
     $newItemBtn = $('.todolist__btn');
     $newItemForm = $('.todolist__form');
     $textInput = $('input:text');
-
     $newItemBtn.show();
     $newItemForm.hide();
-
     $('.todolist__btn').on('click', function() {
       $newItemBtn.hide();
       $newItemForm.show();
@@ -226,7 +234,6 @@ $(function() {
     $newItemForm.on('submit', function(e) {
       e.preventDefault();
       var newText = $('input:text').val();
-
       $('li:last').after('<li class="todolist__item">' + newText + '</li>');
       $newItemForm.hide();
       $newItemBtn.show();
