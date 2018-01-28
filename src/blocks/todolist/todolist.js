@@ -7,7 +7,7 @@ $(function() {
           'padding-right': '+=10'
         });
   }
-  main();
+//  main();
   function ex00() {
     $(':header').addClass('headline');
     $('li:lt(3)').hide().fadeIn(1500);
@@ -19,12 +19,6 @@ $(function() {
   function exampleText() {
     var elem = $('.todolist__item:eq(0)');
     elem.text('<b>Ice cream</b>');
-    $('li:nth-child(2)').addClass('todolist__item--cool');
-  }
-//  exampleText();
-  function exampleText() {
-    var elem = $('.todolist__item:eq(0)');
-    elem.text('Sweets');
     $('li:nth-child(2)').addClass('todolist__item--cool');
   }
 //  exampleText();
@@ -41,7 +35,6 @@ $(function() {
   function ex03() {
     var $listItemHTML = $('li').html();
 //    $('li:eq(0)').prepend('<i class="fa fa-android"></i> ');
-//$('li:eq(0)').prepend('<i class="fa fa-android"></i> ');
     $('li').append(' <i>' + $listItemHTML + '</i> ');
   }
 //  ex03();
@@ -53,7 +46,7 @@ $(function() {
   function ex05() {
     $('li').html(function() {
       return '<a href="#">' + $(this).text() + ' ' + this.className + '</a>';
-      return '<em>' + $(this).text() + '</em>';
+//      return '<em>' + $(this).text() + '</em>';
     });
   }
 //  ex05();
@@ -67,13 +60,6 @@ $(function() {
     $('p.alert').hide().fadeIn(1000);
     var $newListItem = $('<li class="todolist__item"><em>Ice cream</em> sale</li>');
     $('li:eq(3)').remove();
-  }
-//  ex06();
-  function alert07() {
-    $('ul').before('<p class="alert alert--success">List updated!');
-    var $newListItem = $('<li class="todolist__item"><em>Ice cream</em> sale</i>');
-    $('li:last').after($newListItem);
-    $('li').prepend('+ ');
   }
 //  alert07();
   function css08() {
@@ -107,7 +93,6 @@ $(function() {
   function each10() {
     $('li').each(function() {
       var classes = this.className;
-      var classes = this.getAttribute('class');
       $(this).append('<span class="todolist__item--order">'
           + classes + '</span>');
     });
@@ -118,7 +103,6 @@ $(function() {
     var $listItems = $('li');
     $listItems.on('mouseover click', function(e) {
       classes = this.getAttribute('class');
-//      $listItems.children('span').remove();
       $(this).append('<span class="todolist__item--priority">' +
           classes + '</span>');
     });
@@ -132,7 +116,6 @@ $(function() {
       $('li span').remove();
       var date = new Date();
 //      date.setTime(e.timeStamp);
-      date.setTime(e.timeStamp);
       var clicked = date.toDateString();
       $(this).append('<span class="date">' +
           clicked + ' ' + e.type + '</span>');
@@ -192,7 +175,7 @@ $(function() {
       'font-size': '0.7em'
     });
 
-    $h2.on('click', function() {
+    $('h2 a').on('click', function() {
       $h2.next()
           .fadeIn(500)
           .children('.todolist__item--hot')
@@ -226,19 +209,129 @@ $(function() {
     $textInput = $('input:text');
     $newItemBtn.show();
     $newItemForm.hide();
-    $('.todolist__btn').on('click', function() {
+    $newItemBtn.on('click', function() {
       $newItemBtn.hide();
       $newItemForm.show();
+      $textInput.focus();
+    });
+
+    $('body').on('keydown', function(e) {
+      if (e.keyCode == '27') {
+        $newItemForm.hide();
+        $newItemBtn.fadeIn('slow');
+      }
     });
 
     $newItemForm.on('submit', function(e) {
       e.preventDefault();
-      var newText = $('input:text').val();
-      $('li:last').after('<li class="todolist__item">' + newText + '</li>');
+      var newText = $textInput.val();
+      $('li:last').after('<li class="todolist__item">' + newText
+          + '</li>');
       $newItemForm.hide();
       $newItemBtn.show();
       $textInput.val('');
     });
   }
-  form18();
+//  form18();
+  function ex19() {
+    var $cloneQuote = $('p.quote').clone();
+    $('p').remove();
+    $cloneQuote.insertAfter('h2.todolist__title');
+
+    var $moveItem = $('li:first').detach();
+    $moveItem.appendTo('ul');
+  }
+
+  function ex20() {
+    var $listHeight = $('ul.todolist__items').height();
+    $('ul.todolist__items').append('<p> List height is ' +
+        $listHeight + 'px</p>');
+    $('li').width('60%');
+    $('li:eq(0)').width('200').next().width('75%');
+  }
+
+  function ex20() {
+    var footer = $('<p class="footer">&copy; The King of taste</p>');
+    var adv = $('<div class="adSlide">Sale! Just 2 days!</div>');
+    $('.todolist').after(adv).after(footer);
+
+    var $window = $(window);
+    var $adSlide = $('.adSlide');
+    var endZone = $('.footer').offset().top - $window.height() - 100;
+
+    $window.on('scroll', function() {
+      console.log(endZone);
+      if ((endZone) < $window.scrollTop()) {
+        $adSlide.animate({'right': '0'}, 250);
+      } else {
+        $adSlide.stop(true).animate({'right': '-300px'}, 250);
+      }
+    });
+  }
+//  ex20();
+
+  function todolist21() {
+    var $list, $newItemForm, $addButton;
+
+    var item = '';
+    $list = $('ul');
+    $newItemForm = $('form.todolist__form');
+    $addButton = $('button.todolist__btn');
+
+    $('li').hide().each(function(index) {
+      $(this).delay(450 * index).fadeIn(1600);
+    });
+
+    function updateCount() {
+      var items = $('li:not(.todolist__item--complete)').length;
+      $('.todolist__counter')
+          .show()
+          .css('display', 'inline-block')
+          .text(items);
+    }
+
+    updateCount();
+    $addButton.show();
+    $newItemForm.hide();
+
+    $addButton.on('click', function() {
+      $(this).hide();
+      $newItemForm.show();
+    });
+
+    $newItemForm.on('submit', function(e) {
+      e.preventDefault();
+      var text = $('input.todolist__newItemDescr').val();
+      $list.append('<li class="todolist__item">' +
+          text + '</li>');
+      $('input.todolist__newItemDescr').val('');
+
+      updateCount();
+
+      $list.on('click', 'li', function() {
+        var $this = $(this);
+        var complete = $this.hasClass('todolist__item--complete');
+
+        if (complete === true) {
+          $this.animate({
+            opacity: 0,
+            paddingLeft: '+=180'
+          }, 500, 'swing', function() {
+            $this.remove();
+          });
+        } else {
+          item = $this.text();
+          $this.remove();
+
+          $list
+              .append('<li class="todolist__item todolist__item--complete">' +
+              item + '</li>')
+              .hide()
+              .fadeIn(300);
+          updateCount();
+        }
+      });
+    });
+  }
+  todolist21();
 });
